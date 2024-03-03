@@ -1,7 +1,9 @@
 import { FaUser, FaClipboardList, FaListOl } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function BottomNavigation() {
+    const location = useLocation();
+
     return (
         <div className="bottom-navigation">
             <nav>
