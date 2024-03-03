@@ -1,4 +1,4 @@
-import RutaCard from "../components/RutaCard";
+import CardRutazione from "../components/CardRutazione";
 
 export default function Rutazioni() {
   return (
@@ -38,7 +38,7 @@ export default function Rutazioni() {
         [29, 'Muratore bergamasco in bestemmio-deficienza', 'La fase di riscaldamento del mercoledì prevede come antipasto la classica routine di esercizi di muro', 15, 25, 0],
         [30, 'Il giocherellone', 'Propone il bagherone come riscaldamento', 15, 25, 0],
       ].map(([num, title, description, rutas, bonus, malus, malusText]) => (
-        <RutaCard
+        <CardRutazione
           key={num}
           num={num}
           title={title}

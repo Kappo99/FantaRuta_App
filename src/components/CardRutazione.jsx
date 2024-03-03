@@ -1,5 +1,5 @@
 
-export default function RutaCard(props) {
+export default function CardRutazione(props) {
     return (
         <div className="card grid grid-cols-4 gap-4">
             <div className="col-span-3 flex flex-col justify-center">
