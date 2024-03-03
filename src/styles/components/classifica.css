@@ -1,0 +1,15 @@
+.classifica {
+    @apply w-full text-center text-nowrap rounded-xl shadow-xl;
+
+    thead {
+        @apply bg-ruta_yellow-dark;
+    }
+
+    tbody {
+        @apply bg-white;
+    }
+
+    th, td {
+        @apply border-gray-200 border p-2 text-nowrap align-middle;
+    }
+}

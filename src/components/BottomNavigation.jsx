@@ -7,8 +7,8 @@ export default function BottomNavigation() {
             <nav>
                 {[
                     ["Rutazioni", "/", <FaClipboardList size={20} />],
-                    ["Rutasslifica", "/utenti", <FaListOl size={20} />],
-                    ["Account", "/ordini", <FaUser size={20} />],
+                    ["Rutasslifica", "/rutasslifica", <FaListOl size={20} />],
+                    ["Rutatore", "/rutatore", <FaUser size={20} />],
                 ].map(([title, url, icon]) => (
                     <Link
                         key={url}
