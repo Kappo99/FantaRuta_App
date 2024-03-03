@@ -1,9 +1,9 @@
 @layer base {
-    *::-webkit-scrollbar {-webkit-appearance: none; width: 6px; height: 6px;}
+    *::-webkit-scrollbar {-webkit-appearance: none; width: 0px; height: 0px;}
     *::-webkit-scrollbar-track-piece {background-color: #f1f1f1}
     *::-webkit-scrollbar-thumb {background-color: #c1c1c1; border-radius: 10px;}
-    *::-webkit-scrollbar-thumb:vertical {height: 6px}
-    *::-webkit-scrollbar-thumb:horizontal {width: 6px}
+    *::-webkit-scrollbar-thumb:vertical {height: 0px}
+    *::-webkit-scrollbar-thumb:horizontal {width: 0px}
 
     html, body {
         @apply font-montserrat text-ruta_dark selection:bg-ruta_blue selection:text-white scroll-smooth;
