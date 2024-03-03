@@ -1,4 +1,4 @@
-import { FaUserFriends, FaBoxOpen, FaRegHospital, FaUser, FaClipboardList, FaListOl } from "react-icons/fa";
+import { FaUser, FaClipboardList, FaListOl } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function BottomNavigation() {

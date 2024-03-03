@@ -1,0 +1,34 @@
+@layer base {
+    *::-webkit-scrollbar {-webkit-appearance: none; width: 6px; height: 6px;}
+    *::-webkit-scrollbar-track-piece {background-color: #f1f1f1}
+    *::-webkit-scrollbar-thumb {background-color: #c1c1c1; border-radius: 10px;}
+    *::-webkit-scrollbar-thumb:vertical {height: 6px}
+    *::-webkit-scrollbar-thumb:horizontal {width: 6px}
+
+    html, body {
+        @apply font-montserrat text-ruta_dark selection:bg-ruta_blue selection:text-white scroll-smooth;
+    }
+
+    p {
+        @apply mb-2;
+    }
+
+    ul {
+        @apply list-disc list-inside ml-4 mb-2;
+    }
+}
+
+@layer components {
+
+}
+
+@layer utilities {
+    .animation-delay-0 { animation-delay: 0; }
+    .animation-delay-.5 { animation-delay: 500ms; }
+    .animation-delay-1 { animation-delay: 1s; }
+    .animation-delay-2 { animation-delay: 2s; }
+    .animation-delay-3 { animation-delay: 3s; }
+    .animation-delay-4 { animation-delay: 4s; }
+    .animation-delay-5 { animation-delay: 5s; }
+}
+

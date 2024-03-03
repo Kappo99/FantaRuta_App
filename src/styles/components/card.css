@@ -1,0 +1,32 @@
+/** CARD  **/
+
+.card {
+    @apply w-full rounded-xl bg-gray-50 shadow-xl my-4 p-4;
+
+    &__title {
+        @apply h4 text-ruta_blue-dark;
+    }
+
+    &__description {
+        @apply text-sm;
+    }
+
+    &__malus-text {
+        @apply text-sm;
+    }
+
+    &__rutas {
+        @apply w-12 h-12 flex items-center justify-center;
+        @apply bg-yellow-200 rounded-full p-3;
+    }
+
+    &__bonus {
+        @apply w-8 h-8 flex items-center justify-center;
+        @apply bg-green-400 rounded-full p-3 text-sm;
+    }
+
+    &__malus {
+        @apply w-6 h-6 flex items-center justify-center;
+        @apply bg-red-400 rounded-full p-3 text-xs;
+    }
+}

@@ -8,7 +8,7 @@
 
     .nav-link-custom {
       @apply w-full flex flex-col items-center justify-center;
-      @apply text-white rounded-full;
+      @apply text-white rounded-full text-sm;
   
       &.active {
           @apply text-ruta_yellow-dark;

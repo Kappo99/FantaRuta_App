@@ -33,7 +33,7 @@ export default {
         ruta_yellow: {
           dark: '#FCD12A',
           DEFAULT: '#FFF200',
-          light: '#EFFD5F',
+          light: '#FFF798',
         }
       },
     },
