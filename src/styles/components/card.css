@@ -1,7 +1,7 @@
 /** CARD  **/
 
 .card {
-    @apply w-full rounded-xl bg-gray-50 shadow-xl my-4 p-4;
+    @apply w-full rounded-xl bg-gray-50 shadow-xl mb-4 p-4;
 
     &__title {
         @apply h4 text-ruta_blue-dark;
