@@ -33,7 +33,7 @@ export default function Rutazioni() {
         [23, 'Testimonial Fonzies', 'Si lecca le dita', 15, 25, null, null, null, null],
         [24, 'Vocabolario Trepporchi', 'Spiega un esercizio in modo semplice e coinciso. Ad esempio: Affondo: esercizio multi-articolare che coinvolge principalmente muscoli agonisti e sinergici dei quadricipiti, ischiocrurali e glutei, con un’attivazione simultanea dei muscoli stabilizzatori del tronco e delle articolazioni coxofemorali, femoro-tibiali e tibio-tarsiche.', 15, 25, null, null, null, null],
         [25, 'Shopping compulsivo', 'Arriva ad allenamento con una felpa MAI vista', 15, 25, null, null, null, null],
-        [26, 'La vita `e fatta di scale, c’è chi scende e c’è chi sale', 'Usa le scalette durante la parte fisica', 15, 25, null, null, null, null],
+        [26, 'La vita è fatta di scale, c’è chi scende e c’è chi sale', 'Usa le scalette durante la parte fisica', 15, 25, null, null, null, null],
         [27, '”Sono Giaponese”', 'Prende un giallo in partita', 15, 25, null, null, null, null],
         [28, 'Ruta Longobardi', 'Arriva in palestra con i capelli tagliati', 15, 25, null, null, null, null],
         [29, 'Muratore bergamasco in bestemmio-deficienza', 'La fase di riscaldamento del mercoledì prevede come antipasto la classica routine di esercizi di muro', 15, 25, null, null, null, null],
