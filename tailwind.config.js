@@ -19,13 +19,13 @@ export default {
     },
     extend: {
       colors: {
-        fld_dark: '#0e1e2a',
-        fld_blue: {
+        ruta_dark: '#0e1e2a',
+        ruta_blue: {
           dark: '#002487',
           DEFAULT: '#0030AB',
           light: '#c2d9ff',
         },
-        fld_purple: {
+        ruta_purple: {
           dark: '#867afc',
           DEFAULT: '#7752fe',
           light: '#8e8ffa',
