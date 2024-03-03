@@ -1,33 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./layout/Layout";
+import Routing from "./routes/Routing";
+import Login from "./pages/Login";
+import ErrorModal from "./components/ErrorModal";
+import callApi from "./hooks/callApi";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+
+  // Funzione per gestire il login
+  const handleLogin = async (email, password) => {
+    try {
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("password", password);
+
+      const response = await callApi(`utente/accedi`, "POST", formData);
+      const data = await response.json();
+
+      const token = data.body.token;
+      localStorage.setItem("token", token);
+      setIsLoggedIn(true);
+    } catch (error) {
+      setErrorModalVisible(true);
+    }
+  };
+
+  // Funzione per gestire il logout
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {/* Error Modal Login */}
+      <ErrorModal
+        visible={errorModalVisible}
+        onClose={() => setErrorModalVisible(false)}
+      />
+
+      <Router>
+        <Routes>
+          <Route
+            path="*"
+            element={
+              // isLoggedIn ?
+                <Layout>
+                  <Routing onLogout={handleLogout} />
+                </Layout>
+                // :
+                // <Login onLogin={handleLogin} />
+            }
+          />
+        </Routes>
+      </Router>
     </>
   )
 }

@@ -30,6 +30,11 @@ export default {
           DEFAULT: '#7752fe',
           light: '#8e8ffa',
         },
+        ruta_yellow: {
+          dark: '#FCD12A',
+          DEFAULT: '#FFF200',
+          light: '#EFFD5F',
+        }
       },
     },
     fontFamily: {
