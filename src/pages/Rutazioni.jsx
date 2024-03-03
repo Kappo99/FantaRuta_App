@@ -1,10 +1,11 @@
 import CardRutazione from "../components/CardRutazione";
+import { GIORNATA } from "../layout/Layout";
 
 export default function Rutazioni() {
   return (
     <>
       <h1 className="h1 text-white">Rutazioni</h1>
-      <h2 className="h3 text-center text-white">Giornata 3</h2>
+      <h2 className="h3 text-center text-white">Giornata {GIORNATA}</h2>
       {/* <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis, repellat reiciendis! Consequatur, ducimus cupiditate ex incidunt corporis nisi quibusdam dolorum. Exercitationem optio voluptate, nam itaque amet blanditiis alias nemo soluta asperiores ut ratione. Eos, nostrum voluptatum repellat quo odit ipsa neque saepe exercitationem quia inventore recusandae vitae perspiciatis, ea maxime.</p> */}
       {[
         [1, 'Autista scorbutico', 'Si lamenta del traffico trovato in autostrada', 5, 5, 0],
