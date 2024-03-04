@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import CardRutazione from "../components/CardRutazione";
-import { GIORNATA, START_DATE, TODAY } from "../utilities/Constants";
+import { GIORNATA } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 
 export default function Rutazioni() {

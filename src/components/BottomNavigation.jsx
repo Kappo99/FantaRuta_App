@@ -1,4 +1,4 @@
-import { FaUser, FaClipboardList, FaListOl } from "react-icons/fa";
+import { FaUser, FaClipboardList, FaListOl, FaChartLine } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 
 export default function BottomNavigation() {
@@ -9,6 +9,7 @@ export default function BottomNavigation() {
             <nav>
                 {[
                     ["Rutazioni", "/", <FaClipboardList size={20} />],
+                    ["RutaBonus", "/rutabonus", <FaChartLine size={20} />],
                     ["Rutasslifica", "/rutasslifica", <FaListOl size={20} />],
                     ["Rutatore", "/rutatore", <FaUser size={20} />],
                 ].map(([title, url, icon]) => (
