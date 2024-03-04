@@ -1,7 +1,5 @@
 import BottomNavigation from "../components/BottomNavigation";
 
-export const GIORNATA = 3;
-
 export default function Layout({ children }) {
   return (
     <div className="w-full h-dvh relative overflow-hidden">

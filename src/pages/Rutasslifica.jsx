@@ -1,5 +1,5 @@
 import Classifica from "../components/Classifica";
-import { GIORNATA } from "../layout/Layout";
+import { GIORNATA } from "../utilities/Constants";
 
 export default function Rutasslifica() {
     return (
