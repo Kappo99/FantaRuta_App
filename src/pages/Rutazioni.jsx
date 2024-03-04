@@ -49,7 +49,7 @@ export default function Rutazioni() {
         <h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
         {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
       </div>
-      <p className="text-white">Rutazioni verificate: <span>{numRutate}</span> / <span>{count}</span></p>
+      <p className="text-white">Rutazioni avvenute: <span>{numRutate}</span> / <span>{count}</span></p>
       {rutazioniList.length > 0 ? rutazioniList.map((rutazioni, index) => (
         <CardRutazione
           key={rutazioni.Id}
