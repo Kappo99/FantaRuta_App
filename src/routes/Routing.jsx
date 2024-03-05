@@ -3,6 +3,7 @@ import Rutazioni from "../pages/Rutazioni";
 import Rutasslifica from "../pages/Rutasslifica";
 import Rutatore from "../pages/Rutatore";
 import RutaBonus from "../pages/RutaBonus";
+import Regolamento from "../pages/Regolamento";
 
 export default function Routing() {
   return (
@@ -11,6 +12,7 @@ export default function Routing() {
       <Route path="/rutabonus" element={<RutaBonus />} />
       <Route path="/rutasslifica" element={<Rutasslifica />} />
       <Route path="/rutatore" element={<Rutatore />} />
+      <Route path="/regolamento" element={<Regolamento />} />
     </Routes>
   );
 }

@@ -1,0 +1,7 @@
+.btn {
+    @apply w-fit text-center px-6 py-2 rounded-full bg-ruta_blue text-white;
+    @apply flex items-center gap-2;
+    &:hover {
+        @apply bg-ruta_blue-dark;
+    }
+}
