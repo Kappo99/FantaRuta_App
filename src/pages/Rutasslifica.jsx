@@ -41,7 +41,7 @@ export default function Rutasslifica() {
 					{rutasslificaList.length > 0 && rutasslificaList.map((rutasslifica, index) => (
 						<tr key={index}>
 							<td>{index + 1}</td>
-							<td>#{rutasslifica.Num} {rutasslifica.Name}</td>
+							<td>#{rutasslifica.Rutatore.Num} {rutasslifica.Rutatore.Name}</td>
 							<td>{rutasslifica.MonteRuta}</td>
 						</tr>
 					))}
