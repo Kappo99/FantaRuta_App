@@ -21,7 +21,7 @@ export default function Rutasslifica() {
 		else {
 			setRutasslificaList([]);
 		}
-		// console.log(rutasslificaList);
+		console.log(rutasslificaList);
 	}
 
 	return (
@@ -38,15 +38,17 @@ export default function Rutasslifica() {
 					</tr>
 				</thead>
 				<tbody>
-					{rutasslificaList.length > 0 ? rutasslificaList.map((rutasslifica, index) => (
+					{rutasslificaList.length > 0 && rutasslificaList.map((rutasslifica, index) => (
 						<tr key={index}>
 							<td>{index + 1}</td>
 							<td>#{rutasslifica.Num} {rutasslifica.Name}</td>
 							<td>{rutasslifica.MonteRuta}</td>
 						</tr>
-					)) :
-						<p className="text-white text-center">Rutasslifica non disponibile...</p>}
-					{/* {[
+					))}
+				</tbody>
+			</table>
+			{rutasslificaList.length == 0 && <p className="text-white text-center">Rutasslifica non disponibile...</p>}
+			{/* {[
 						[3, 'Stella', 1],
 						[2, 'Cardazzo', 9],
 						[13, 'Cappone', 75],
@@ -68,8 +70,6 @@ export default function Rutasslifica() {
 							<td>{monteruta}</td>
 						</tr>
 					))} */}
-				</tbody>
-			</table>
 		</>
 	);
 }
