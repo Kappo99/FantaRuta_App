@@ -1,0 +1,28 @@
+/** NAVBAR  **/
+
+.navbar {
+  @apply w-full h-16 fixed top-0 bg-ruta_blue py-2 z-50;
+  @apply flex items-center justify-between;
+
+  .hamburger-icon {
+    @apply flex flex-col items-center justify-between gap-2;
+    /* @apply p-4 rounded-xl hover:bg-tsunami_blue-dark; */
+
+    .hamburger-line {
+        @apply w-8 h-1 bg-white rounded-lg;
+        @apply transition-all duration-300 ease-in-out;
+    }
+
+    &.show {
+        .hamburger-line {
+            &:nth-child(1) {
+                @apply transform -rotate-45 translate-y-1.5;
+            }
+            &:nth-child(2) {
+                @apply transform rotate-45 -translate-y-1.5;
+            }
+        }
+    }
+  }
+
+}

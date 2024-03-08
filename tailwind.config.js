@@ -36,6 +36,9 @@ export default {
           light: '#FFF798',
         }
       },
+      content: {
+        'chevron_right': 'url("/assets/content/chevron_right.svg")',
+      },
     },
     fontFamily: {
       'montserrat': ['Montserrat', 'sans-serif'],

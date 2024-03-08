@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import { FaFileAlt } from "react-icons/fa";
 
 export default function Rutatore() {
     return (
@@ -10,12 +8,6 @@ export default function Rutatore() {
                 <p>L'idea è quella di mostrare le Rutazioni scelte della settimana, e lo storico di tutte le Rutazioni scelte in passato</p>
                 <p>Se hai dei suggerimenti scrivici!</p>
             </div>
-            <Link
-                to="/regolamento"
-                className="btn"
-            >
-                Regolamento <FaFileAlt size={20} />
-            </Link>
         </>
     );
 }

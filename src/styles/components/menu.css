@@ -1,0 +1,32 @@
+/** MENU  **/
+
+.menu {
+  @apply w-full h-dvh fixed top-0 -left-full bg-ruta_blue py-2;
+  /* @apply flex flex-col items-center justify-between; */
+  @apply transition-all duration-300 ease-in-out;
+
+  &.show {
+    @apply left-0;
+  }
+
+  nav {
+    @apply w-full h-full flex flex-col items-center justify-start pt-20;
+
+    .nav-link-custom {
+      @apply w-full flex items-center justify-start gap-4 px-6 py-4;
+      @apply text-white text-lg;
+      @apply border-b border-white;
+
+      background-size: 10px;
+      background-image: url('/content/chevron_right.svg');
+      background-repeat: no-repeat;
+      background-position: right center; /* Imposta la posizione dell'immagine (in questo caso, a destra al centro) */
+      background-position-x: calc(100% - 20px);
+  
+      &.active {
+          @apply text-ruta_yellow-dark;
+      }
+    }
+  }
+
+}

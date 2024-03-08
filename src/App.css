@@ -10,6 +10,8 @@
 @import "./styles/utilities/typography.css";
 
 @import "./styles/components/bottom-navigation.css";
+@import "./styles/components/navbar.css";
+@import "./styles/components/menu.css";
 @import "./styles/components/card.css";
 @import "./styles/components/classifica.css";
 @import "./styles/components/button.css";
