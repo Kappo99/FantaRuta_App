@@ -38,9 +38,11 @@ export default function Formazioni() {
     const partialMonteRuta = (rutazioni) => {
         let monteRuta = 0;
         rutazioni.forEach(rutazione => {
+            console.log(rutazione);
             monteRuta += rutazione.IsRutata ? rutazione.MonteRuta : 0;
+            // monteRuta -= !rutazione.IsRutata ? rutazione.Malus : 0; //* NON funziona, non sempre il Malus è complementare al MonteRuta
         });
-        return monteRuta;
+        return (monteRuta > 0 ? '+' : '') + monteRuta;
     }
 
     return (
@@ -55,12 +57,14 @@ export default function Formazioni() {
                 <div key={index} className="card">
                     <h3 className="h4">#{formazione.rutatore.Num} {formazione.rutatore.Name}</h3>
                     <span className="w-12 h-12 rounded-full bg-yellow-200 absolute top-4 right-4 flex items-center justify-center shadow-lg">
-                        +{partialMonteRuta(formazione.rutazioni)}
+                        {partialMonteRuta(formazione.rutazioni)}
                     </span>
                     {formazione.rutazioni.map((rutazione, index) => (
                         <div key={index} className="flex items-center gap-3 mb-2 pl-1">
                             <span className={`w-4 h-4 rounded-full bg-${rutazione.IsRutata ? 'green' : 'red'}-400`}></span>
-                            <p className="flex-1 !mb-0">{rutazione.Num}. {rutazione.Title}</p>
+                            <p className={`flex-1 !mb-0 ${rutazione.Malus != null ? 'font-bold' : ''} ${rutazione.Bonus != null ? 'underline' : ''}`}>
+                                {rutazione.Num}. {rutazione.Title}
+                            </p>
                         </div>
                     ))}
                 </div>
