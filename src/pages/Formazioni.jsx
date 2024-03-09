@@ -38,7 +38,6 @@ export default function Formazioni() {
     const partialMonteRuta = (rutazioni) => {
         let monteRuta = 0;
         rutazioni.forEach(rutazione => {
-            console.log(rutazione);
             monteRuta += rutazione.IsRutata ? rutazione.MonteRuta : 0;
             // monteRuta -= !rutazione.IsRutata ? rutazione.Malus : 0; //* NON funziona, non sempre il Malus è complementare al MonteRuta
         });
@@ -61,7 +60,7 @@ export default function Formazioni() {
                     </span>
                     {formazione.rutazioni.map((rutazione, index) => (
                         <div key={index} className="flex items-center gap-3 mb-2 pl-1">
-                            <span className={`w-4 h-4 rounded-full bg-${rutazione.IsRutata ? 'green' : 'red'}-400`}></span>
+                            <span className={`w-4 h-4 rounded-full bg-${rutazione.IsRutata ? 'green' : 'red'}-500`}></span>
                             <p className={`flex-1 !mb-0 ${rutazione.Malus != null ? 'font-bold' : ''} ${rutazione.Bonus != null ? 'underline' : ''}`}>
                                 {rutazione.Num}. {rutazione.Title}
                             </p>
