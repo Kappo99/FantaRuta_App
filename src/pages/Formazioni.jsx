@@ -35,6 +35,14 @@ export default function Formazioni() {
             setGiornata(giornata + 1);
     }
 
+    const partialMonteRuta = (rutazioni) => {
+        let monteRuta = 0;
+        rutazioni.forEach(rutazione => {
+            monteRuta += rutazione.IsRutata ? rutazione.MonteRuta : 0;
+        });
+        return monteRuta;
+    }
+
     return (
         <>
             <h1 className="h1 text-white">Formazioni</h1>
@@ -43,11 +51,17 @@ export default function Formazioni() {
                 <h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
                 {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
             </div>
-            {formazioniList.length > 0 ? formazioniList.map((formazioni, index) => (
+            {formazioniList.length > 0 ? formazioniList.map((formazione, index) => (
                 <div key={index} className="card">
-                    <h3 className="h4">#{formazioni.rutatore.Num} {formazioni.rutatore.Name}</h3>
-                    {formazioni.rutazioni.map((rutazione, index) => (
-                        <p key={index} className="pl-3">{rutazione.Num}. {rutazione.Title}</p>
+                    <h3 className="h4">#{formazione.rutatore.Num} {formazione.rutatore.Name}</h3>
+                    <span className="w-12 h-12 rounded-full bg-yellow-200 absolute top-4 right-4 flex items-center justify-center shadow-lg">
+                        +{partialMonteRuta(formazione.rutazioni)}
+                    </span>
+                    {formazione.rutazioni.map((rutazione, index) => (
+                        <div key={index} className="flex items-center gap-3 mb-2 pl-1">
+                            <span className={`w-4 h-4 rounded-full bg-${rutazione.IsRutata ? 'green' : 'red'}-400`}></span>
+                            <p className="flex-1 !mb-0">{rutazione.Num}. {rutazione.Title}</p>
+                        </div>
                     ))}
                 </div>
             )) :

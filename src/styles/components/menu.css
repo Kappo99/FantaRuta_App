@@ -1,7 +1,7 @@
 /** MENU  **/
 
 .menu {
-  @apply w-full h-dvh fixed top-0 -left-full bg-ruta_blue py-2;
+  @apply w-full h-dvh fixed top-0 -left-full bg-ruta_blue py-2 z-40;
   /* @apply flex flex-col items-center justify-between; */
   @apply transition-all duration-300 ease-in-out;
 
