@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { GIORNATA } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import IndexChanges from "../components/IndexChanges";
@@ -6,13 +7,14 @@ import IndexChanges from "../components/IndexChanges";
 export default function Rutasslifica() {
 	const [rutasslificaList, setRutasslificaList] = useState([]);
 	const [rutasslificaPrevList, setRutasslificaPrevList] = useState([]);
+	const [giornata, setGiornata] = useState(GIORNATA - 1); //* Si aggiorna SOLO a fine giornata, prima di iniziare quella nuova
 
 	useEffect(() => {
 		fillRutasslificaList();
-	}, []);
+	}, [giornata]);
 
 	const fillRutasslificaList = async () => {
-		const response = await callApi(`rutasslifica/${GIORNATA - 1}`, 'GET');
+		const response = await callApi(`rutasslifica/${giornata}`, 'GET');
 		const data = await response.json();
 		// console.log(data);
 
@@ -27,18 +29,32 @@ export default function Rutasslifica() {
 		// console.log(rutasslificaList);
 	}
 
+	const prevGiornata = () => {
+		if (giornata > 1)
+			setGiornata(giornata - 1);
+	}
+	const nextGiornata = () => {
+		if (giornata < GIORNATA - 1) //* La giornata in corso sara sempre uguale alla precedente
+			setGiornata(giornata + 1);
+	}
+
 	const indexByNumRutatore = (list, n) => {
 		for (let i = 0; i < list.length; i++) {
 			if (list[i].Rutatore.Num == n)
 				return i;
 		}
-		return 0;
+		return null;
 	}
 
 	return (
 		<>
 			<h1 className="h1 text-white">Rutasslifica</h1>
-			<h2 className="h3 text-center text-white">Giornata {GIORNATA - 1}</h2>
+			<div className="flex items-center justify-between mb-4 text-white">
+				{giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}
+				<h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
+				{giornata < GIORNATA - 1 ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
+			</div>
+			{/* <h2 className="h3 text-center text-white">Giornata {giornata}</h2> */}
 			<table className="classifica">
 				<thead>
 					<tr>
@@ -55,7 +71,7 @@ export default function Rutasslifica() {
 							<td>#{rutasslifica.Rutatore.Num} {rutasslifica.Rutatore.Name}</td>
 							<td>{rutasslifica.MonteRuta}</td>
 							<td>
-								<IndexChanges value={indexByNumRutatore(rutasslificaPrevList, rutasslifica.Rutatore.Num) - index} />
+								<IndexChanges value={rutasslificaPrevList.length > 0 ? indexByNumRutatore(rutasslificaPrevList, rutasslifica.Rutatore.Num) - index : 0} />
 							</td>
 						</tr>
 					))}
