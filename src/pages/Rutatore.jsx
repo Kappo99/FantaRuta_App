@@ -26,7 +26,7 @@ export default function Rutatore() {
         if (response.status == 200) {
             setRutazioniList(data.body.rutazioni);
             if (isActiveList.length == 0)
-                setIsActiveList(Array(rutazioniList.length).fill(false));
+                setIsActiveList(Array(data.body.rutazioni.length).fill(false));
         }
         else {
             setRutazioniList([]);
@@ -37,8 +37,8 @@ export default function Rutatore() {
     }
 
     const onClickCardRutazione = (index) => {
-        const newActiveList = isActiveList.map((c, i) => {
-            return i === index ? !c : c;
+        const newActiveList = isActiveList.map((v, i) => {
+            return i === index ? !v : v;
         });
 
         let newRutas = rutazioniList[index].Rutas;
@@ -53,6 +53,16 @@ export default function Rutatore() {
             setHasError(true);
     }
 
+    const onSaveFormazione = () => {
+        console.log('SAVE Clicked');
+        let rutazioniSelected = [];
+        isActiveList.map((v, i) => {
+            if (v)
+                rutazioniSelected.push(rutazioniList[i].Id);
+        });
+        console.log(rutazioniSelected);
+    }
+
     return (
         <>
             <Loading visible={isLoading} />
@@ -64,11 +74,12 @@ export default function Rutatore() {
             />
             <h1 className="h1 text-white">Rutatore</h1>
             <h2 className="h3 text-center text-white mb-4">Giornata {GIORNATA}</h2>
-            <p className="text-white">Rutas: <span>{rutas}</span> / <span>{MAX_RUTAS}</span></p>
             <div className="w-20 h-12 fixed top-16 right-0 rounded-b-full bg-ruta_blue text-white flex items-center justify-center z-50 shadow-md">
                 <p><span>{rutas}</span> / <span className="font-semibold">{MAX_RUTAS}</span></p>
-
             </div>
+            <button onClick={onSaveFormazione} className={`${rutas <= 0 ? 'hidden' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md`}>
+                Salva
+            </button>
             {rutazioniList.length > 0 ? rutazioniList.map((rutazioni, index) => (
                 <CardRutazione
                     key={rutazioni.Id}
