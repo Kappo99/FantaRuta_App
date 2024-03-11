@@ -6,7 +6,7 @@
     *::-webkit-scrollbar-thumb:horizontal {width: 0px}
 
     html, body {
-        @apply font-montserrat text-ruta_dark selection:bg-ruta_blue selection:text-white scroll-smooth;
+        @apply font-montserrat text-ruta_dark selection:bg-ruta_blue selection:text-white scroll-smooth select-none;
     }
 
     p {

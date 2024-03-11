@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import CardRutazione from "../components/CardRutazione";
+import CardRutazione from "../components/Cards/CardRutazione";
 import { GIORNATA } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
+import Loading from "../components/Loading";
 
 export default function Rutazioni() {
+  const [isLoading, setIsLoading] = useState(false);
   const [rutazioniList, setRutazioniList] = useState([]);
   const [giornata, setGiornata] = useState(GIORNATA);
   const [count, setCount] = useState(0);
@@ -15,6 +17,7 @@ export default function Rutazioni() {
   }, [giornata]);
 
   const fillRutazioniList = async () => {
+    setIsLoading(true);
     const response = await callApi(`rutazioni/${giornata}`, 'GET');
     const data = await response.json();
     // console.log(data);
@@ -29,6 +32,7 @@ export default function Rutazioni() {
       setCount(0);
       setNumRutate(0);
     }
+    setIsLoading(false);
     // console.log(rutazioniList);
   }
 
@@ -43,6 +47,7 @@ export default function Rutazioni() {
 
   return (
     <>
+      <Loading show={isLoading} />
       <h1 className="h1 text-white">Rutazioni</h1>
       <div className="flex items-center justify-between mb-4 text-white">
         {giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}

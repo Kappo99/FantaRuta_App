@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import CardRutazione from "../components/CardRutazione";
 import { GIORNATA } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
+import Loading from "../components/Loading";
 
 export default function Formazioni() {
+    const [isLoading, setIsLoading] = useState(false);
     const [formazioniList, setFormazioniList] = useState([]);
     const [giornata, setGiornata] = useState(GIORNATA);
 
@@ -13,6 +14,7 @@ export default function Formazioni() {
     }, [giornata]);
 
     const fillFormazioniList = async () => {
+        setIsLoading(true);
         const response = await callApi(`formazioni/${giornata}`, 'GET');
         const data = await response.json();
         // console.log(data);
@@ -23,6 +25,7 @@ export default function Formazioni() {
         else {
             setFormazioniList([]);
         }
+        setIsLoading(false);
         // console.log(formazioniList);
     }
 
@@ -46,6 +49,7 @@ export default function Formazioni() {
 
     return (
         <>
+            <Loading show={isLoading} />
             <h1 className="h1 text-white">Formazioni</h1>
             <div className="flex items-center justify-between mb-4 text-white">
                 {giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}

@@ -3,8 +3,10 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { GIORNATA } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import IndexChanges from "../components/IndexChanges";
+import Loading from "../components/Loading";
 
 export default function Rutasslifica() {
+	const [isLoading, setIsLoading] = useState(false);
 	const [rutasslificaList, setRutasslificaList] = useState([]);
 	const [rutasslificaPrevList, setRutasslificaPrevList] = useState([]);
 	const [giornata, setGiornata] = useState(GIORNATA - 1); //* Si aggiorna SOLO a fine giornata, prima di iniziare quella nuova
@@ -14,6 +16,7 @@ export default function Rutasslifica() {
 	}, [giornata]);
 
 	const fillRutasslificaList = async () => {
+		setIsLoading(true);
 		const response = await callApi(`rutasslifica/${giornata}`, 'GET');
 		const data = await response.json();
 		// console.log(data);
@@ -26,6 +29,7 @@ export default function Rutasslifica() {
 			setRutasslificaList([]);
 			setRutasslificaPrevList([]);
 		}
+		setIsLoading(false);
 		// console.log(rutasslificaList);
 	}
 
@@ -48,6 +52,7 @@ export default function Rutasslifica() {
 
 	return (
 		<>
+			<Loading show={isLoading} />
 			<h1 className="h1 text-white">Rutasslifica</h1>
 			<div className="flex items-center justify-between mb-4 text-white">
 				{giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}
