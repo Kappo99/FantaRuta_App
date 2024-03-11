@@ -20,7 +20,7 @@ export default function Navbar() {
                     <img className="w-full p-3" src="/images/kappo.svg" alt="Kappo" />
                 </div>
             </div>
-            <Menu show={showMenu} onChangePage={() => setShowMenu(false)} />
+            <Menu visible={showMenu} onChangePage={() => setShowMenu(false)} />
         </>
     );
 }

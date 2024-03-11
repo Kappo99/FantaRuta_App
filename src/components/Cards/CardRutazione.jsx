@@ -1,7 +1,7 @@
 
 export default function CardRutazione(props) {
     return (
-        <div className={`card grid grid-cols-4 gap-4 ${props.isRutata ? 'is-rutata' : ''}`}>
+        <div className={`card grid grid-cols-4 gap-4 ${props.isRutata ? 'is-rutata' : ''} ${props.isActive ? 'is-active' : ''}`} onClick={props.onClick}>
             <div className="col-span-3 flex flex-col justify-center">
                 <div className="card__title">
                     {props.num}. {props.title}

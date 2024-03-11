@@ -47,7 +47,7 @@ export default function Rutazioni() {
 
   return (
     <>
-      <Loading show={isLoading} />
+      <Loading visible={isLoading} />
       <h1 className="h1 text-white">Rutazioni</h1>
       <div className="flex items-center justify-between mb-4 text-white">
         {giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}

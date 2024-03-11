@@ -30,7 +30,7 @@ export default function RutaBonus() {
 
   return (
     <>
-      <Loading show={isLoading} />
+      <Loading visible={isLoading} />
       <h1 className="h1 text-white">RutaBonus</h1>
       {rutabonusList.length > 0 ? rutabonusList.map((rutabonus, index) => (
         <CardRutaBonus

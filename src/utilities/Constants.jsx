@@ -3,3 +3,5 @@ export const TODAY = new Date();
 const dateDiff = new Date(TODAY.getTime() - START_DATE.getTime());
 const daysDiff = dateDiff.getUTCDate() - 1;
 export const GIORNATA = Math.floor(daysDiff / 7) + 1;
+
+export const MAX_RUTAS = 50;
