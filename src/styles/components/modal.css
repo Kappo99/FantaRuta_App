@@ -31,7 +31,7 @@
         }
 
         &__header {
-            @apply w-full h-20 bg-ruta_yellow-dark rounded-t-xl relative;
+            @apply w-full h-20 rounded-t-xl relative;
             @apply flex items-center justify-center;
 
             &__icon {

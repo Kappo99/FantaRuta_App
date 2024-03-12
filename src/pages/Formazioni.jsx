@@ -4,6 +4,15 @@ import { GIORNATA } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import Loading from "../components/Loading";
 
+export const partialMonteRuta = (rutazioni) => {
+    let monteRuta = 0;
+    rutazioni.forEach(rutazione => {
+        monteRuta += rutazione.IsRutata ? rutazione.MonteRuta : 0;
+        // monteRuta -= !rutazione.IsRutata ? rutazione.Malus : 0; //* NON funziona, non sempre il Malus è complementare al MonteRuta
+    });
+    return (monteRuta > 0 ? '+' : '') + monteRuta;
+}
+
 export default function Formazioni() {
     const [isLoading, setIsLoading] = useState(false);
     const [formazioniList, setFormazioniList] = useState([]);
@@ -36,15 +45,6 @@ export default function Formazioni() {
     const nextGiornata = () => {
         if (giornata < GIORNATA)
             setGiornata(giornata + 1);
-    }
-
-    const partialMonteRuta = (rutazioni) => {
-        let monteRuta = 0;
-        rutazioni.forEach(rutazione => {
-            monteRuta += rutazione.IsRutata ? rutazione.MonteRuta : 0;
-            // monteRuta -= !rutazione.IsRutata ? rutazione.Malus : 0; //* NON funziona, non sempre il Malus è complementare al MonteRuta
-        });
-        return (monteRuta > 0 ? '+' : '') + monteRuta;
     }
 
     return (
