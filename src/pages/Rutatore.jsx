@@ -144,7 +144,7 @@ export default function Rutatore() {
                 <h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
                 {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
             </div>
-            <div className="w-20 h-12 fixed top-16 right-0 rounded-b-full bg-ruta_blue text-white flex items-center justify-center z-50 shadow-md">
+            <div className="w-20 h-12 fixed top-16 right-0 rounded-b-full bg-ruta_blue text-white flex items-center justify-center z-30 shadow-md">
                 {IS_EDITABLE && giornata == GIORNATA ?
                     <p><span>{rutas}</span> / <span className="font-semibold">{MAX_RUTAS}</span></p> :
                     <p><span className="font-semibold text-xl">{partialMonteRuta(rutazioniList)}</span></p>}

@@ -5,7 +5,7 @@ export default function Menu(props) {
     const location = useLocation();
 
     return (
-        <div className={`menu ${props.show ? 'show' : ''}`}>
+        <div className={`menu ${props.visible ? 'show' : ''}`}>
             <nav>
                 {[
                     ["Rutazioni", "/", <FaClipboardList size={20} />],
