@@ -1,5 +1,4 @@
 const server = "https://api-fantaruta.kappo.it";
-const token = localStorage.getItem("token");
 
 async function callApi(uri, method, data) {
   const requestOptions = {
@@ -7,6 +6,7 @@ async function callApi(uri, method, data) {
     body: data,
   };
 
+  const token = localStorage.getItem("token");
   if (token != null) {
     requestOptions.headers = {
       Authorization: `Bearer ${token}`,
