@@ -185,7 +185,7 @@ export default function Rutatore() {
                             <p><span>{rutas}</span> / <span className="font-semibold">{MAX_RUTAS}</span></p> :
                             <p><span className="font-semibold text-xl">{partialMonteRuta(rutazioniList)}</span></p>}
                     </div>
-                    <button onClick={() => IS_EDITABLE && giornata == GIORNATA && onSaveFormazione()} className={`${rutas <= 0 || !IS_EDITABLE ? 'bottom-0 translate-y-full' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md transition-all ease-in-out duration-300`}>
+                    <button onClick={() => IS_EDITABLE && giornata == GIORNATA && onSaveFormazione()} className={`${rutas <= 0 || !IS_EDITABLE ? 'bottom-0 translate-y-64' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md transition-all ease-in-out duration-300`}>
                         Salva
                     </button>
                     <div className="card">
