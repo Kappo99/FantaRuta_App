@@ -189,10 +189,10 @@ export default function Rutatore() {
                         Salva
                     </button>
                     <div className="card">
-                        <h3 className="h4">Spiegazione</h3>
+                        <h3 className="h4">Visualizzazione</h3>
                         <p>In questa pagina puoi vedere le tue Formazioni di tutte le giornate, e in alto a destra il MonteRutas guadagnato. </p>
                         <p>Un po' come viene fatto nella pagina Formazioni... ma solo per te.</p>
-                        <h3 className="h4 mt-8">Formazione</h3>
+                        <h3 className="h4 mt-8">Creazione</h3>
                         <p>Per creare la tua Formazione apri questa schermata la Domenica, e clicca sulle Rutazioni che vuoi acquistare.</p>
                         <p>Le stesse si coloreranno di giallo, e vedrai in alto a destra i tuoi Rutas utilizzati.</p>
                         <p>Sarà possibile modificare la Formazione infinite volte, fino alle 23.59 di Domenica.</p>
