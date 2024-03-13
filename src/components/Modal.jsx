@@ -7,13 +7,13 @@ const getBgColor = (type) => {
     case MODAL_TYPES.WARNING:
       return 'ruta_yellow-dark';
     case MODAL_TYPES.ERROR:
-      return 'red-500';
+      return 'red-600';
     default:
       return 'ruta_blue';
   }
 }
 
-export default function ErrorModal(props) {
+export default function Modal(props) {
   return (
     <div className={`modal ${props.visible ? 'show' : ''}`}>
       <div className="modal__container">

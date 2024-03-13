@@ -4,11 +4,13 @@ import CardRutazione from "../components/Cards/CardRutazione";
 import { GIORNATA, IS_EDITABLE, MAX_RUTAS } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import Loading from "../components/Loading";
-import ErrorModal, { MODAL_TYPES } from "../components/ErrorModal";
+import Modal, { MODAL_TYPES } from "../components/Modal";
 import { partialMonteRuta } from "./Formazioni";
+import Login from "./Login";
 
 export default function Rutatore() {
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isModalVisible, setModalVisible] = useState(false);
     const [modalDescription, setModalDescription] = useState('');
     const [modalType, setModalType] = useState(MODAL_TYPES.WARNING);
@@ -18,8 +20,37 @@ export default function Rutatore() {
     const [rutas, setRutas] = useState(0);
 
     useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token != null)
+            setIsLoggedIn(true);
         fillRutazioniList();
     }, [giornata]);
+
+    // Funzione per gestire il login
+    const handleLogin = async (num, password) => {
+        try {
+            const formData = new FormData();
+            formData.append('num', num);
+            formData.append('password', password);
+
+            const response = await callApi(`login`, "POST", formData);
+            const data = await response.json();
+
+            const token = data.body.token;
+            localStorage.setItem('token', token);
+            setIsLoggedIn(true);
+        } catch (error) {
+            setModalDescription('Dati di accesso errati');
+            setModalType(MODAL_TYPES.ERROR);
+            setModalVisible(true);
+        }
+    };
+
+    // Funzione per gestire il logout
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        setIsLoggedIn(false);
+    };
 
     const fillRutazioniList = async () => {
         setIsLoading(true);
@@ -134,51 +165,61 @@ export default function Rutatore() {
     return (
         <>
             <Loading visible={isLoading} />
-            <ErrorModal
+            <Modal
                 visible={isModalVisible}
                 onClose={() => setModalVisible(false)}
                 title={'Attenzione!'}
                 description={modalDescription}
                 type={modalType}
             />
-            <h1 className="h1 text-white">Rutatore</h1>
-            <div className="flex items-center justify-between mb-4 text-white">
-                {giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}
-                <h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
-                {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
-            </div>
-            <div className="w-20 h-12 fixed top-16 right-0 rounded-b-full bg-ruta_blue text-white flex items-center justify-center z-30 shadow-md">
-                {IS_EDITABLE && giornata == GIORNATA ?
-                    <p><span>{rutas}</span> / <span className="font-semibold">{MAX_RUTAS}</span></p> :
-                    <p><span className="font-semibold text-xl">{partialMonteRuta(rutazioniList)}</span></p>}
-            </div>
-            <button onClick={() => IS_EDITABLE && giornata == GIORNATA && onSaveFormazione()} className={`${rutas <= 0 || !IS_EDITABLE ? 'bottom-0 translate-y-full' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md transition-all ease-in-out duration-300`}>
-                Salva
-            </button>
-            {rutazioniList.length > 0 ? rutazioniList.map((rutazioni, index) => (
-                <CardRutazione
-                    key={rutazioni.Id}
-                    num={rutazioni.Num}
-                    title={rutazioni.Title}
-                    description={rutazioni.Description}
-                    rutas={rutazioni.Rutas}
-                    monteruta={rutazioni.MonteRuta}
-                    malus={rutazioni.Malus}
-                    malusText={rutazioni.MalusText}
-                    bonus={rutazioni.Bonus}
-                    bonusText={rutazioni.BonusText}
-                    isRutata={rutazioni.IsRutata}
-                    isActive={isActiveList[index]}
-                    onClick={() => onClickCardRutazione(index)}
-                />
-            )) :
-                <p className="text-white text-center">Nessuna Rutazione trovata per la Giornata selezionata...</p>
-            }
-            {/* <div className="card">
-                <p>Questa sezione è ancora in fase di sviluppo</p>
-                <p>L'idea è quella di mostrare le Rutazioni scelte della settimana, e lo storico di tutte le Rutazioni scelte in passato</p>
-                <p>Se hai dei suggerimenti scrivici!</p>
-            </div> */}
+            {isLoggedIn ?
+                <>
+                    <h1 className="h1 text-white">Rutatore</h1>
+                    <div className="flex items-center justify-between mb-4 text-white">
+                        {giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}
+                        <h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
+                        {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
+                    </div>
+                    <div className="w-20 h-12 fixed top-16 right-0 rounded-b-full bg-ruta_blue text-white flex items-center justify-center z-30 shadow-md">
+                        {IS_EDITABLE && giornata == GIORNATA ?
+                            <p><span>{rutas}</span> / <span className="font-semibold">{MAX_RUTAS}</span></p> :
+                            <p><span className="font-semibold text-xl">{partialMonteRuta(rutazioniList)}</span></p>}
+                    </div>
+                    <button onClick={() => IS_EDITABLE && giornata == GIORNATA && onSaveFormazione()} className={`${rutas <= 0 || !IS_EDITABLE ? 'bottom-0 translate-y-full' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md transition-all ease-in-out duration-300`}>
+                        Salva
+                    </button>
+                    <div className="card">
+                        <h3 className="h4">Spiegazione</h3>
+                        <p>In questa pagina puoi vedere le tue Formazioni di tutte le giornate, e in alto a destra il MonteRutas guadagnato. </p>
+                        <p>Un po' come viene fatto nella pagina Formazioni... ma solo per te.</p>
+                        <h3 className="h4 mt-8">Formazione</h3>
+                        <p>Per creare la tua Formazione apri questa schermata la Domenica, e clicca sulle Rutazioni che vuoi acquistare.</p>
+                        <p>Le stesse si coloreranno di giallo, e vedrai in alto a destra i tuoi Rutas utilizzati.</p>
+                        <p>Sarà possibile modificare la Formazione infinite volte, fino alle 23.59 di Domenica.</p>
+                        <p><b>IMPORTANTE:</b> Non dimenticarti di cliccare sul bottone "Salva" che compare in basso, altrimenti non potrai partecipare alla giornata.</p>
+                    </div>
+                    <h2 className="h1 mt-10">Rutazioni</h2>
+                    {rutazioniList.length > 0 ? rutazioniList.map((rutazioni, index) => (
+                        <CardRutazione
+                            key={rutazioni.Id}
+                            num={rutazioni.Num}
+                            title={rutazioni.Title}
+                            description={rutazioni.Description}
+                            rutas={rutazioni.Rutas}
+                            monteruta={rutazioni.MonteRuta}
+                            malus={rutazioni.Malus}
+                            malusText={rutazioni.MalusText}
+                            bonus={rutazioni.Bonus}
+                            bonusText={rutazioni.BonusText}
+                            isRutata={rutazioni.IsRutata}
+                            isActive={isActiveList[index]}
+                            onClick={() => onClickCardRutazione(index)}
+                        />
+                    )) :
+                        <p className="text-white text-center">Nessuna Rutazione trovata per la Giornata selezionata...</p>
+                    }
+                </> :
+                <Login onLogin={handleLogin} />}
         </>
     );
 }
