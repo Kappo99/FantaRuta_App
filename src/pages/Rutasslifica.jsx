@@ -4,12 +4,13 @@ import { GIORNATA } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import IndexChanges from "../components/IndexChanges";
 import Loading from "../components/Loading";
+import { partialMonteRuta } from "./Formazioni";
 
 export default function Rutasslifica() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [rutasslificaList, setRutasslificaList] = useState([]);
 	const [rutasslificaPrevList, setRutasslificaPrevList] = useState([]);
-	const [giornata, setGiornata] = useState(GIORNATA - 1); //* Si aggiorna SOLO a fine giornata, prima di iniziare quella nuova
+	const [giornata, setGiornata] = useState(GIORNATA);
 
 	useEffect(() => {
 		fillRutasslificaList();
@@ -22,7 +23,22 @@ export default function Rutasslifica() {
 		// console.log(data);
 
 		if (response.status == 200) {
-			setRutasslificaList(data.body.rutasslifica);
+			if (giornata == GIORNATA) { //* La giornata in corso si aggiorna in modo dinamico tramite le Formazioni
+				const formazioni = await getFormazioniList();
+				const rutasslifica = data.body.rutasslifica;
+				formazioni.map((formazione, index) => {
+					rutasslifica.forEach(r => {
+						if (formazione.rutatore.Id == r.IdRutatore)
+							r.MonteRuta += parseInt(partialMonteRuta(formazione.rutazioni));
+					});
+					console.log(formazione);
+				});
+				sortByMonteRutaDescending(rutasslifica);
+				console.log(rutasslifica);
+				setRutasslificaList(rutasslifica);
+			}
+			else
+				setRutasslificaList(data.body.rutasslifica);
 			setRutasslificaPrevList(data.body.rutasslificaPrev);
 		}
 		else {
@@ -38,9 +54,27 @@ export default function Rutasslifica() {
 			setGiornata(giornata - 1);
 	}
 	const nextGiornata = () => {
-		if (giornata < GIORNATA - 1) //* La giornata in corso sara sempre uguale alla precedente
+		if (giornata < GIORNATA)
 			setGiornata(giornata + 1);
 	}
+
+	const sortByMonteRutaDescending = (array) => {
+		array.sort((a, b) => b.MonteRuta - a.MonteRuta);
+	  }
+
+	const getFormazioniList = async () => {
+        const response = await callApi(`formazioni/${giornata}`, 'GET');
+        const data = await response.json();
+        // console.log(data);
+
+        if (response.status == 200) {
+            return Object.values(data.body.formazioni);
+        }
+        else {
+            return [];
+        }
+        // console.log(formazioniList);
+    }
 
 	const indexByNumRutatore = (list, n) => {
 		for (let i = 0; i < list.length; i++) {
@@ -57,7 +91,7 @@ export default function Rutasslifica() {
 			<div className="flex items-center justify-between mb-4 text-white">
 				{giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}
 				<h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
-				{giornata < GIORNATA - 1 ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
+				{giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
 			</div>
 			{/* <h2 className="h3 text-center text-white">Giornata {giornata}</h2> */}
 			<table className="classifica">
