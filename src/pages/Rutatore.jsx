@@ -36,8 +36,8 @@ export default function Rutatore() {
             const response = await callApi(`login`, "POST", formData);
             const data = await response.json();
 
-            const token = data.body.token;
-            localStorage.setItem('token', token);
+            localStorage.setItem('token', data.body.token);
+            localStorage.setItem('idRutatore', data.body.idRutatore);
             setIsLoggedIn(true);
         } catch (error) {
             setModalDescription('Dati di accesso errati');
@@ -49,6 +49,7 @@ export default function Rutatore() {
     // Funzione per gestire il logout
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('idRutatore');
         setIsLoggedIn(false);
     };
 

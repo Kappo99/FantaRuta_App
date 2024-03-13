@@ -1,4 +1,4 @@
-import { FaUser, FaClipboardList, FaListOl, FaChartLine, FaUserFriends, FaFileAlt } from "react-icons/fa";
+import { FaUser, FaClipboardList, FaListOl, FaChartLine, FaUserFriends, FaFileAlt, FaList, FaSquare } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Menu(props) {
