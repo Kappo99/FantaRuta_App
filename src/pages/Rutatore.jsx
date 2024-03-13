@@ -34,9 +34,11 @@ export default function Rutatore() {
                 const localActiveList = JSON.parse(localStorage.getItem('isActiveList'));
                 setIsActiveList(localActiveList ?? Array(data.body.rutazioni.length).fill(false));
                 let rutas = 0;
-                for (let i = 0; i < localActiveList.length; i++) {
-                    if (localActiveList[i]) {
-                        rutas += data.body.rutazioni[i].Rutas;
+                if (localActiveList != null) {
+                    for (let i = 0; i < localActiveList.length; i++) {
+                        if (localActiveList[i]) {
+                            rutas += data.body.rutazioni[i].Rutas;
+                        }
                     }
                 }
                 setRutas(rutas);
@@ -51,6 +53,7 @@ export default function Rutatore() {
             const data = await response.json();
             // console.log(data);
 
+            localStorage.removeItem('isActiveList');
             if (response.status == 200) {
                 Object.values(data.body.formazioni).map((f, i) => {
                     if (f.rutatore.Id == 13)
@@ -113,7 +116,7 @@ export default function Rutatore() {
         // console.log(rutazioniSelected);
         const formData = new FormData();
         formData.append('rutazioni', JSON.stringify(rutazioniSelected));
-        const response = await callApi(`formazioni/${giornata}`, 'POST', formData);
+        const response = await callApi(`formazioni/5${giornata}`, 'POST', formData);
         const data = await response.json();
         // console.log(data);
 
@@ -149,7 +152,7 @@ export default function Rutatore() {
                     <p><span>{rutas}</span> / <span className="font-semibold">{MAX_RUTAS}</span></p> :
                     <p><span className="font-semibold text-xl">{partialMonteRuta(rutazioniList)}</span></p>}
             </div>
-            <button onClick={() => IS_EDITABLE && giornata == GIORNATA && onSaveFormazione()} className={`${rutas <= 0 || !IS_EDITABLE ? 'hidden' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md`}>
+            <button onClick={() => IS_EDITABLE && giornata == GIORNATA && onSaveFormazione()} className={`${rutas <= 0 || !IS_EDITABLE ? 'bottom-0 translate-y-full' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md transition-all ease-in-out duration-300`}>
                 Salva
             </button>
             {rutazioniList.length > 0 ? rutazioniList.map((rutazioni, index) => (
