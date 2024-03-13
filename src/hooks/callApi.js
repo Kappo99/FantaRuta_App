@@ -17,6 +17,7 @@ async function callApi(uri, method, data) {
 
   if (response.status == 401) {
     localStorage.removeItem("token");
+    localStorage.removeItem("idRutatore");
   }
 
   return response;
