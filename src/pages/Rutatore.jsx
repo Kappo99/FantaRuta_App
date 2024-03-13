@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaFileExport, FaRegIdBadge, FaRegUser, FaUserSlash } from "react-icons/fa";
 import CardRutazione from "../components/Cards/CardRutazione";
 import { GIORNATA, IS_EDITABLE, MAX_RUTAS } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
@@ -179,6 +179,9 @@ export default function Rutatore() {
                         {giornata > 1 ? <FaChevronLeft size={24} onClick={prevGiornata} /> : <div className="w-6"></div>}
                         <h2 className="h3 text-center !mb-0">Giornata {giornata}</h2>
                         {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
+                    </div>
+                    <div className="w-16 h-16 fixed bottom-4 right-4 rounded-full bg-ruta_yellow-dark text-black flex items-center justify-center z-30 shadow-md">
+                        <button onClick={handleLogout}><FaUserSlash size={24} /></button>
                     </div>
                     <div className="w-20 h-12 fixed top-16 right-0 rounded-b-full bg-ruta_blue text-white flex items-center justify-center z-30 shadow-md">
                         {IS_EDITABLE && giornata == GIORNATA ?
