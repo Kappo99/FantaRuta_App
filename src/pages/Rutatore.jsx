@@ -55,6 +55,7 @@ export default function Rutatore() {
 
     const fillRutazioniList = async () => {
         setIsLoading(true);
+        const idRutatore = localStorage.getItem('idRutatore') ?? -1;
         if (IS_EDITABLE && giornata == GIORNATA) {
             const response = await callApi(`rutazioni/${giornata}`, 'GET');
             const data = await response.json();
@@ -88,7 +89,7 @@ export default function Rutatore() {
             localStorage.removeItem('isActiveList');
             if (response.status == 200) {
                 Object.values(data.body.formazioni).map((f, i) => {
-                    if (f.rutatore.Id == 13)
+                    if (f.rutatore.Id == idRutatore)
                         setRutazioniList(f.rutazioni);
                 });
             }
