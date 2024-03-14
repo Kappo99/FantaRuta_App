@@ -1,8 +1,8 @@
 /** MENU  **/
 
 .menu {
-  @apply w-full h-dvh fixed top-0 -left-full bg-ruta_blue py-2 z-40;
-  /* @apply flex flex-col items-center justify-between; */
+  @apply w-full h-dvh fixed top-0 -left-full bg-ruta_blue text-white py-2 z-40;
+  @apply flex flex-col items-center justify-between;
   @apply transition-all duration-300 ease-in-out;
 
   &.show {
@@ -14,8 +14,7 @@
 
     .nav-link-custom {
       @apply w-full flex items-center justify-start gap-4 px-6 py-4;
-      @apply text-white text-lg;
-      @apply border-b border-white;
+      @apply text-lg border-b border-white;
 
       background-size: 10px;
       background-image: url('/content/chevron_right.svg');
