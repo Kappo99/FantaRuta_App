@@ -1,7 +1,6 @@
 import { FaUser, FaClipboardList, FaListOl, FaChartLine, FaUserFriends, FaFileAlt, FaList, FaSquare } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import packageJson from '/package.json';
-import { TODAY } from "../utilities/Constants";
 
 export default function Menu(props) {
     const location = useLocation();
