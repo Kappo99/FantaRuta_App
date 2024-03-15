@@ -150,7 +150,7 @@ export default function Rutatore() {
         // console.log(rutazioniSelected);
         const formData = new FormData();
         formData.append('rutazioni', JSON.stringify(rutazioniSelected));
-        const response = await callApi(`formazioni/5${giornata}`, 'POST', formData);
+        const response = await callApi(`formazioni/${giornata}`, 'POST', formData);
         const data = await response.json();
         // console.log(data);
 
