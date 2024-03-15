@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Menu from "./Menu";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
     const [showMenu, setShowMenu] = useState(false);
@@ -17,7 +18,9 @@ export default function Navbar() {
                     <div className="font-semibold text-2xl text-white text-center">FantaRuta</div>
                 </div>
                 <div className="w-16">
-                    <img className="w-full p-3" src="/images/kappo.svg" alt="Kappo" />
+                    <Link to="https://kappo.it" target="_blank">
+                        <img className="w-full p-3" src="/images/kappo.svg" alt="Kappo" />
+                    </Link>
                 </div>
             </div>
             <Menu visible={showMenu} onChangePage={() => setShowMenu(false)} />
