@@ -23,8 +23,9 @@ export default function Rutatore() {
         const token = localStorage.getItem('token');
         if (token != null)
             setIsLoggedIn(true);
-        fillRutazioniList();
-    }, [giornata]);
+        if (isLoggedIn)
+            fillRutazioniList();
+    }, [giornata, isLoggedIn]);
 
     // Funzione per gestire il login
     const handleLogin = async (num, password) => {
