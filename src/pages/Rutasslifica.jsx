@@ -31,10 +31,8 @@ export default function Rutasslifica() {
 						if (formazione.rutatore.Id == r.IdRutatore)
 							r.MonteRuta += parseInt(partialMonteRuta(formazione.rutazioni));
 					});
-					console.log(formazione);
 				});
 				sortByMonteRutaDescending(rutasslifica);
-				console.log(rutasslifica);
 				setRutasslificaList(rutasslifica);
 			}
 			else
