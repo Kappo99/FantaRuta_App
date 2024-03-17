@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { GIORNATA } from "../utilities/Constants";
+import { GIORNATA, IS_EDITABLE } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import Loading from "../components/Loading";
 
@@ -28,7 +28,8 @@ export default function Formazioni() {
         const data = await response.json();
         // console.log(data);
 
-        if (response.status == 200) {
+        const idRutatore = localStorage.getItem('idRutatore') ?? -1;
+        if (response.status == 200 && (!(IS_EDITABLE && giornata == GIORNATA) || idRutatore == 13)) {
             setFormazioniList(Object.values(data.body.formazioni));
         }
         else {
