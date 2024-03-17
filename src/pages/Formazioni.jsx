@@ -17,6 +17,9 @@ export default function Formazioni() {
     const [isLoading, setIsLoading] = useState(false);
     const [formazioniList, setFormazioniList] = useState([]);
     const [giornata, setGiornata] = useState(GIORNATA);
+    const idRutatore = localStorage.getItem('idRutatore') ?? -1;
+    // const isFormazioniHidden = ;
+    // console.log();
 
     useEffect(() => {
         fillFormazioniList();
@@ -28,8 +31,7 @@ export default function Formazioni() {
         const data = await response.json();
         // console.log(data);
 
-        const idRutatore = localStorage.getItem('idRutatore') ?? -1;
-        if (response.status == 200 && (!(IS_EDITABLE && giornata == GIORNATA) || idRutatore == 13)) {
+        if (response.status == 200 /* && (!(IS_EDITABLE && giornata == GIORNATA) || idRutatore == 13) */) {
             setFormazioniList(Object.values(data.body.formazioni));
         }
         else {
@@ -58,7 +60,7 @@ export default function Formazioni() {
                 {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
             </div>
             {formazioniList.length > 0 ? formazioniList.map((formazione, index) => (
-                <div key={index} className="card">
+                <div key={index} className={`card ${IS_EDITABLE && giornata == GIORNATA && (idRutatore != 13 && idRutatore != formazione.rutatore.Id) ? 'hidden' : ''}`}>
                     <h3 className="h4">#{formazione.rutatore.Num} {formazione.rutatore.Name}</h3>
                     <span className="w-12 h-12 rounded-full bg-yellow-200 absolute top-4 right-4 flex items-center justify-center shadow-lg">
                         {partialMonteRuta(formazione.rutazioni)}
@@ -75,6 +77,7 @@ export default function Formazioni() {
             )) :
                 <p className="text-white text-center">Nessuna Formazione trovata per la Giornata selezionata...</p>
             }
+            {IS_EDITABLE && <p className="text-white text-center">Le Formazioni per la Giornata in corso verranno mostrate da Lunedì...</p>}
         </>
     );
 }

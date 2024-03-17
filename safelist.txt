@@ -11,3 +11,8 @@ text-amber-500
 
 font-bold
 underline
+
+hidden
+
+bottom-0
+translate-y-64
