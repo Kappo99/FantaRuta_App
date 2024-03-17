@@ -60,7 +60,7 @@ export default function Regolamento() {
                     <p>
                         Il FantaRuta entra nel vivo dell’azione con
                         l’allenamento del Lunedì, che segna l’avvio della competizione. Da questo
-                        momento in poi, ogni Rutazione detta pu`o influenzare il punteggio dei
+                        momento in poi, ogni Rutazione detta può influenzare il punteggio dei
                         Rutatori.
                     </p>
                     <p>
@@ -75,7 +75,7 @@ export default function Regolamento() {
                         gioco, poiché i Rutatori devono essere attenti alle parole di Ruta e alle
                         Rutazioni che possono essere pronunciate. Essi devono fare affidamento
                         sul loro istinto e sulla loro conoscenza del personaggio per anticipare e
-                        includere le Rutazioni con la maggior Rutabilit`a percentuale nella loro
+                        includere le Rutazioni con la maggior Rutabilità percentuale nella loro
                         formazione.
                     </p>
                 </div>
@@ -106,13 +106,13 @@ export default function Regolamento() {
                         Il Bonus Raddoppio consente ai Rutatori di ottenere il doppio dei punti
                         per ogni Rutazione registrata quando viene attivato. Questo significa che
                         ogni volta che Ruta pronuncia una Rutazinoe durante l’evento, il giocatore
-                        che ha attivato il Bonus Raddoppio ricever`a il doppio dei punti rispetto a
+                        che ha attivato il Bonus Raddoppio riceverà il doppio dei punti rispetto a
                         quanto riceverebbe normalmente.
                     </p>
                     <p>
                         Tuttavia, c’è un’importante considerazione da tenere presente: una volta
                         utilizzato il Bonus Raddoppio, il credito disponibile per la settimana succes3
-                        siva verr`a dimezzato. Questo significa che il giocatore avrà meno Rutas a
+                        siva verrà dimezzato. Questo significa che il giocatore avrà meno Rutas a
                         disposizione per la settimana successiva.
                     </p>
                     <p>

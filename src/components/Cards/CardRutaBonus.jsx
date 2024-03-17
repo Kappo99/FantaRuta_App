@@ -1,4 +1,29 @@
 
+const textToHtml = (text) => {
+    // Dividi il testo in paragrafi utilizzando '\n' come delimitatore
+    const paragraphs = text.split('\n');
+
+    // Mappa ogni paragrafo in un elemento <p> e gestisci il testo in grassetto
+    const formattedText = paragraphs.map((paragraph, index) => {
+        // Rileva e converte il testo in grassetto
+        const parts = paragraph.split('*');
+        return (
+            <span key={index} className="block mb-2">
+                {parts.map((part, index) => {
+                    if (index % 2 === 0) {
+                        return part;
+                    } else {
+                        return <b key={index}>{part}</b>;
+                    }
+                })}
+                {/* <br /> */}
+            </span>
+        );
+    });
+
+    return formattedText;
+}
+
 export default function CardRutaBonus(props) {
     return (
         <div className="card">
@@ -15,7 +40,7 @@ export default function CardRutaBonus(props) {
                 <b>Consigli per l'uso:</b> {props.isActive ? props.hint : '?????'}
             </p>
             <p className="card__description">
-                {props.isActive ? props.ps : '?????'}
+                {props.isActive ? textToHtml(props.ps) : '?????'}
             </p>
         </div>
     );
