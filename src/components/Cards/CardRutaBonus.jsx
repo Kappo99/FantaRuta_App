@@ -34,13 +34,7 @@ export default function CardRutaBonus(props) {
                 <img src={`/images/bonus/${props.isActive ? props.image : 'unknown.jpg'}`} alt={props.title} />
             </div>
             <p className="card__description">
-                {props.isActive ? props.description : '?????'}
-            </p>
-            <p className="card__description">
-                <b>Consigli per l'uso:</b> {props.isActive ? props.hint : '?????'}
-            </p>
-            <p className="card__description">
-                {props.isActive ? textToHtml(props.ps) : '?????'}
+                {props.isActive ? textToHtml(props.description) : '?????'}
             </p>
         </div>
     );

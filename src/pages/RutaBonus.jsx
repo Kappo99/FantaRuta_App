@@ -37,8 +37,6 @@ export default function RutaBonus() {
           key={rutabonus.Id}
           title={rutabonus.Title}
           description={rutabonus.Description}
-          hint={rutabonus.Hint}
-          ps={rutabonus.PS}
           image={rutabonus.Image}
           isActive={rutabonus.IsActive}
         />
