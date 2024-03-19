@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import callApi from "../../hooks/callApi";
 import Loading from "../Loading";
+import { IS_EDITABLE } from "../../utilities/Constants";
 
 export default function CardRutazione(props) {
     const [isLoading, setIsLoading] = useState(false);
@@ -69,11 +70,11 @@ export default function CardRutazione(props) {
                         }
                     </div>
                 </div>
-                <div className="col-span-4">
+                {!IS_EDITABLE && <div className="col-span-4">
                     <p className="card__description italic">
                         Giocata da: {count} Rutatori
                     </p>
-                </div>
+                </div>}
             </div>
         </>
     );
