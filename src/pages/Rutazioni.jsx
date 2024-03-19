@@ -90,6 +90,7 @@ export default function Rutazioni() {
       {rutazioniList.length > 0 ? rutazioniList.map((rutazione, index) => (
         <CardRutazione
           key={rutazione.Id}
+          id={rutazione.Id}
           num={rutazione.Num}
           title={rutazione.Title}
           description={rutazione.Description}
