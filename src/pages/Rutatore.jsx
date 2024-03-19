@@ -18,6 +18,7 @@ export default function Rutatore() {
     const [giornata, setGiornata] = useState(GIORNATA);
     const [isActiveList, setIsActiveList] = useState([]);
     const [rutas, setRutas] = useState(0);
+    const [rutatore, setRutatore] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -39,6 +40,9 @@ export default function Rutatore() {
 
             localStorage.setItem('token', data.body.token);
             localStorage.setItem('idRutatore', data.body.idRutatore);
+            localStorage.setItem('nameRutatore', data.body.nameRutatore);
+            localStorage.setItem('roleRutatore', data.body.roleRutatore);
+            setRutatore(data.body.nameRutatore);
             setIsLoggedIn(true);
         } catch (error) {
             setModalDescription('Dati di accesso errati');
@@ -206,6 +210,7 @@ export default function Rutatore() {
                         <p><b>IMPORTANTE:</b> Non dimenticarti di cliccare sul bottone "Salva" che compare in basso, altrimenti non potrai partecipare alla giornata.</p>
                     </div>
                     <h2 className="h1 mt-10">Rutazioni</h2>
+                    <h3 className="h2 text-center">{rutatore}</h3>
                     {rutazioniList.length > 0 ? rutazioniList.map((rutazioni, index) => (
                         <CardRutazione
                             key={rutazioni.Id}

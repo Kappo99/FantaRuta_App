@@ -18,8 +18,7 @@ export default function Formazioni() {
     const [formazioniList, setFormazioniList] = useState([]);
     const [giornata, setGiornata] = useState(GIORNATA);
     const idRutatore = localStorage.getItem('idRutatore') ?? -1;
-    // const isFormazioniHidden = ;
-    // console.log();
+    const roleRutatore = localStorage.getItem('roleRutatore') ?? 'User';
 
     useEffect(() => {
         fillFormazioniList();
@@ -31,7 +30,7 @@ export default function Formazioni() {
         const data = await response.json();
         // console.log(data);
 
-        if (response.status == 200 /* && (!(IS_EDITABLE && giornata == GIORNATA) || idRutatore == 13) */) {
+        if (response.status == 200) {
             setFormazioniList(Object.values(data.body.formazioni));
         }
         else {
@@ -60,7 +59,7 @@ export default function Formazioni() {
                 {giornata < GIORNATA ? <FaChevronRight size={24} onClick={nextGiornata} /> : <div className="w-6"></div>}
             </div>
             {formazioniList.length > 0 ? formazioniList.map((formazione, index) => (
-                <div key={index} className={`card ${IS_EDITABLE && giornata == GIORNATA && (idRutatore != 13 && idRutatore != formazione.rutatore.Id) ? 'hidden' : ''}`}>
+                <div key={index} className={`card ${IS_EDITABLE && giornata == GIORNATA && (roleRutatore != 'Admin' && idRutatore != formazione.rutatore.Id) ? 'hidden' : ''}`}>
                     <h3 className="h4">#{formazione.rutatore.Num} {formazione.rutatore.Name}</h3>
                     <span className="w-12 h-12 rounded-full bg-yellow-200 absolute top-4 right-4 flex items-center justify-center shadow-lg">
                         {partialMonteRuta(formazione.rutazioni)}

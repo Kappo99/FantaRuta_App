@@ -15,7 +15,7 @@ export default function Rutazioni() {
   const [giornata, setGiornata] = useState(GIORNATA);
   const [count, setCount] = useState(0);
   const [numRutate, setNumRutate] = useState(0);
-  const idRutatore = localStorage.getItem('idRutatore') ?? -1;
+  const roleRutatore = localStorage.getItem('roleRutatore') ?? 'User';
 
   useEffect(() => {
     fillRutazioniList();
@@ -51,7 +51,7 @@ export default function Rutazioni() {
   }
 
   const onClickCardRutazione = async (index) => {
-    if (idRutatore == 13) {
+    if (roleRutatore == 'Admin') {
       const idRutazione = rutazioniList[index].Id;
       setIsLoading(true);
       const response = await callApi(`rutazioni/${idRutazione}`, 'PUT');
