@@ -55,6 +55,8 @@ export default function Rutatore() {
     const handleLogout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('idRutatore');
+        localStorage.removeItem('nameRutatore');
+        localStorage.removeItem('roleRutatore');
         setIsLoggedIn(false);
     };
 
@@ -214,6 +216,7 @@ export default function Rutatore() {
                     {rutazioniList.length > 0 ? rutazioniList.map((rutazioni, index) => (
                         <CardRutazione
                             key={rutazioni.Id}
+                            id={rutazioni.Id}
                             num={rutazioni.Num}
                             title={rutazioni.Title}
                             description={rutazioni.Description}
