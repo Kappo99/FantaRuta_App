@@ -15,6 +15,7 @@ export default function Rutatore() {
     const [modalDescription, setModalDescription] = useState('');
     const [modalType, setModalType] = useState(MODAL_TYPES.WARNING);
     const [rutazioniList, setRutazioniList] = useState([]);
+    const [bonus_x2, setBonus_x2] = useState(false);
     const [giornata, setGiornata] = useState(GIORNATA);
     const [isActiveList, setIsActiveList] = useState([]);
     const [rutas, setRutas] = useState(0);
@@ -97,8 +98,10 @@ export default function Rutatore() {
                 localStorage.removeItem('isActiveList');
             if (response.status == 200) {
                 Object.values(data.body.formazioni).map((f, i) => {
-                    if (f.rutatore.Id == idRutatore)
+                    if (f.rutatore.Id == idRutatore) {
                         setRutazioniList(f.rutazioni);
+                        setBonus_x2(f.bonus_x2);
+                    }
                 });
             }
             else {
@@ -196,7 +199,7 @@ export default function Rutatore() {
                     <div className="w-20 h-12 fixed top-16 right-0 rounded-b-full bg-ruta_blue text-white flex items-center justify-center z-30 shadow-md">
                         {IS_EDITABLE && giornata == GIORNATA ?
                             <p><span>{rutas}</span> / <span className="font-semibold">{MAX_RUTAS}</span></p> :
-                            <p><span className="font-semibold text-xl">{partialMonteRuta(rutazioniList)}</span></p>}
+                            <p><span className="font-semibold text-xl">{partialMonteRuta(rutazioniList, bonus_x2)}</span></p>}
                     </div>
                     <button onClick={() => IS_EDITABLE && giornata == GIORNATA && onSaveFormazione()} className={`${rutas <= 0 || !IS_EDITABLE || giornata != GIORNATA ? 'bottom-0 translate-y-64' : ''} px-6 py-2 fixed bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-ruta_yellow-dark active:bg-ruta_yellow font-semibold text-lg flex items-center justify-center z-50 shadow-md transition-all ease-in-out duration-300`}>
                         Salva

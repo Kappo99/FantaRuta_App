@@ -4,10 +4,12 @@ import { GIORNATA, IS_EDITABLE } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import Loading from "../components/Loading";
 
-export const partialMonteRuta = (rutazioni) => {
+export const partialMonteRuta = (rutazioni, bonus_x2 = false) => {
     let monteRuta = 0;
     rutazioni.forEach(rutazione => {
         monteRuta += rutazione.IsRutata ? rutazione.MonteRuta : 0;
+        if (rutazione.IsRutata && bonus_x2)
+            monteRuta += rutazione.MonteRuta;
         // monteRuta -= !rutazione.IsRutata ? rutazione.Malus : 0; //* NON funziona, non sempre il Malus è complementare al MonteRuta
     });
     return (monteRuta > 0 ? '+' : '') + monteRuta;
@@ -62,7 +64,7 @@ export default function Formazioni() {
                 <div key={index} className={`card ${IS_EDITABLE && giornata == GIORNATA && (roleRutatore != 'Admin' && idRutatore != formazione.rutatore.Id) ? 'hidden' : ''}`}>
                     <h3 className="h4">#{formazione.rutatore.Num} {formazione.rutatore.Name}</h3>
                     <span className="w-12 h-12 rounded-full bg-yellow-200 absolute top-4 right-4 flex items-center justify-center shadow-lg">
-                        {partialMonteRuta(formazione.rutazioni)}
+                        {partialMonteRuta(formazione.rutazioni, formazione.bonus_x2)}
                     </span>
                     {formazione.rutazioni.map((rutazione, index) => (
                         <div key={index} className="flex items-center gap-3 mb-2 pl-1">

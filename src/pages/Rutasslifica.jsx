@@ -29,7 +29,7 @@ export default function Rutasslifica() {
 				formazioni.map((formazione, index) => {
 					rutasslifica.forEach(r => {
 						if (formazione.rutatore.Id == r.IdRutatore)
-							r.MonteRuta += parseInt(partialMonteRuta(formazione.rutazioni));
+							r.MonteRuta += parseInt(partialMonteRuta(formazione.rutazioni, formazione.bonus_x2));
 					});
 				});
 				sortByMonteRutaDescending(rutasslifica);
