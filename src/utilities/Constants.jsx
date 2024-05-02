@@ -6,3 +6,9 @@ const daysDiff = Math.floor(dateDiff / (1000 * 3600 * 24)); // Convertire la dif
 export const GIORNATA = Math.floor(daysDiff / 7) + 1;
 
 export const MAX_RUTAS = 50;
+
+export const STATUS = {
+    DESELECTED: 0,
+    STANDARD: 1,
+    OVERPOWER: 2,
+}

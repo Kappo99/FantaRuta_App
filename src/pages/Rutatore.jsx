@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FaChevronLeft, FaChevronRight, FaFileExport, FaRegIdBadge, FaRegUser, FaUserSlash } from "react-icons/fa";
 import CardRutazione from "../components/Cards/CardRutazione";
-import { GIORNATA, IS_EDITABLE, MAX_RUTAS } from "../utilities/Constants";
+import { GIORNATA, IS_EDITABLE, MAX_RUTAS, STATUS } from "../utilities/Constants";
 import callApi from "../hooks/callApi";
 import Loading from "../components/Loading";
 import Modal, { MODAL_TYPES } from "../components/Modal";
@@ -73,7 +73,7 @@ export default function Rutatore() {
                 setRutazioniList(data.body.rutazioni);
                 // if (isActiveList.length == 0)
                 const localActiveList = JSON.parse(localStorage.getItem('isActiveList'));
-                setIsActiveList(localActiveList ?? Array(data.body.rutazioni.length).fill(false));
+                setIsActiveList(localActiveList ?? Array(data.body.rutazioni.length).fill(STATUS.DESELECTED));
                 let rutas = 0;
                 if (localActiveList != null) {
                     for (let i = 0; i < localActiveList.length; i++) {
@@ -125,11 +125,11 @@ export default function Rutatore() {
     const onClickCardRutazione = (index) => {
         if (IS_EDITABLE && giornata == GIORNATA) {
             const newActiveList = isActiveList.map((v, i) => {
-                return i === index ? !v : v;
+                return (i === index ? v+1 : v) % 3;
             });
 
-            let newRutas = rutazioniList[index].Rutas;
-            if (!newActiveList[index])
+            let newRutas = newActiveList[index] !== STATUS.OVERPOWER ? rutazioniList[index].Rutas : 0;
+            if (newActiveList[index] == STATUS.DESELECTED)
                 newRutas = -newRutas;
             const totalRutas = rutas + newRutas;
             if (totalRutas >= 0 && totalRutas <= MAX_RUTAS) {
@@ -152,10 +152,22 @@ export default function Rutatore() {
 
     const onSaveFormazione = async () => {
         let rutazioniSelected = [];
+        let countOP = 0;
         isActiveList.map((v, i) => {
-            if (v)
+            if (v != STATUS.DESELECTED)
                 rutazioniSelected.push(rutazioniList[i].Id);
+            if (v == STATUS.OVERPOWER) {
+                rutazioniSelected.push(rutazioniList[i].Id);
+                countOP++;
+            }
         });
+
+        if (countOP != 1) {
+            setModalType(MODAL_TYPES.WARNING);
+            setModalDescription('Seleziona 1 Rutazione con il Bonus x5 (colore viola)');
+            setModalVisible(true);
+            return;
+        }
 
         // console.log(rutazioniSelected);
         const formData = new FormData();

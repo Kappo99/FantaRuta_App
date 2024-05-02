@@ -8,7 +8,9 @@ export const partialMonteRuta = (rutazioni, bonus_x2 = false) => {
     let monteRuta = 0;
     rutazioni.forEach(rutazione => {
         monteRuta += rutazione.IsRutata ? rutazione.MonteRuta : 0;
-        if (rutazione.IsRutata && bonus_x2)
+        if (rutazione.IsRutata && rutazione.Bonus_x5)
+            monteRuta += rutazione.MonteRuta * 4; // NO 5 perché 1 è già stato contato sopra
+        if (rutazione.IsRutata && !rutazione.Bonus_x5 && bonus_x2)
             monteRuta += rutazione.MonteRuta;
         // monteRuta -= !rutazione.IsRutata ? rutazione.Malus : 0; //* NON funziona, non sempre il Malus è complementare al MonteRuta
     });

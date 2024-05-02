@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import callApi from "../../hooks/callApi";
 import Loading from "../Loading";
-import { IS_EDITABLE } from "../../utilities/Constants";
+import { IS_EDITABLE, STATUS } from "../../utilities/Constants";
 
 export default function CardRutazione(props) {
     const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,10 @@ export default function CardRutazione(props) {
     return (
         <>
             <Loading visible={isLoading} />
-            <div className={`card grid grid-cols-4 gap-x-4 ${props.isRutata ? 'is-rutata' : ''} ${props.isActive ? 'is-active' : ''}`} onClick={props.onClick}>
+            <div 
+                className={`card grid grid-cols-4 gap-x-4 ${props.isRutata ? 'is-rutata' : ''} 
+                    ${props.isActive == STATUS.STANDARD ? 'is-active' : (props.isActive == STATUS.OVERPOWER ? 'is-overpower' : '')}`} 
+                    onClick={props.onClick}>
                 <div className="col-span-3 flex flex-col justify-center">
                     <div className="card__title">
                         {props.num}. {props.title}

@@ -11,6 +11,10 @@
         @apply !bg-amber-200 border-4 border-ruta_blue-dark;
     }
 
+    &.is-overpower {
+        @apply !bg-purple-200 border-4 border-ruta_blue-dark;
+    }
+
     &__title {
         @apply h4 text-ruta_blue-dark;
     }
