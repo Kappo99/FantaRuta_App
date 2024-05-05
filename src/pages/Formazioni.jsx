@@ -64,14 +64,14 @@ export default function Formazioni() {
             </div>
             {formazioniList.length > 0 ? formazioniList.map((formazione, index) => (
                 <div key={index} className={`card ${IS_EDITABLE && giornata == GIORNATA && (roleRutatore != 'Admin' && idRutatore != formazione.rutatore.Id) ? 'hidden' : ''}`}>
-                    <h3 className="h4">#{formazione.rutatore.Num} {formazione.rutatore.Name}</h3>
+                    <h3 className="h4">#{formazione.rutatore.Num} {formazione.rutatore.Name} {formazione.bonus_x2 ? 'x2' : ''}</h3>
                     <span className="w-12 h-12 rounded-full bg-yellow-200 absolute top-4 right-4 flex items-center justify-center shadow-lg">
                         {partialMonteRuta(formazione.rutazioni, formazione.bonus_x2)}
                     </span>
                     {formazione.rutazioni.map((rutazione, index) => (
                         <div key={index} className="flex items-center gap-3 mb-2 pl-1">
                             <span className={`w-4 h-4 rounded-full bg-${rutazione.IsRutata ? 'green' : 'red'}-500`}></span>
-                            <p className={`flex-1 !mb-0 ${rutazione.Malus != null ? 'font-bold' : ''} ${rutazione.Bonus != null ? 'underline' : ''}`}>
+                            <p className={`flex-1 !mb-0 ${rutazione.Malus != null ? 'font-bold' : ''} ${rutazione.Bonus != null ? 'underline' : ''} ${rutazione.Bonus_x5 ? 'font-bold text-purple-500' : ''}`}>
                                 {rutazione.Num}. {rutazione.Title}
                             </p>
                         </div>
